@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './search.less';
+import girl from './images/girl.png';
 
 class Search extends React.Component {
     constructor() {
@@ -21,7 +22,9 @@ class Search extends React.Component {
     }
 
     render() {
-        return <div className="lzw" onClick={this.sayCool}>{this.state.text}</div>
+        return <div className="lzw" onClick={ this.sayCool }>
+            {this.state.text}<img src={ girl }/>
+        </div>
     }
 
     // render() {

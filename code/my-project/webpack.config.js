@@ -1,6 +1,7 @@
 'use strict'
 
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
@@ -11,7 +12,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: '[name].js'
     },
-    mode: 'production',
+    mode: 'development',
     module: {
         rules: [
             {
@@ -32,7 +33,27 @@ module.exports = {
                     'css-loader',
                     'less-loader'
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10240
+                    }
+                }
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                use: 'file-loader'
             }
         ]
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        contentBase: './dist',
+        hot: true
     }
 }
